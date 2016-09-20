@@ -59,11 +59,6 @@ public class StandardJsonResponseImpl implements StandardJsonResponse {
 		return messages;
 	}
 
-	@Override
-	public String getMessage() {
-		return messages.get(DEFAULT_MSG_NAME_FIELD);
-	}
-
 	/**
 	 * @param errors
 	 *            the errors to set
@@ -103,11 +98,6 @@ public class StandardJsonResponseImpl implements StandardJsonResponse {
 		this.success = success;
 		messages.put(DEFAULT_MSG_NAME_FIELD, (message == null || message.isEmpty()) ? "" : message);
 		messages.put(DEFAULT_MSG_TITLE_FIELD, (title == null || title.isEmpty()) ? "" : title);
-	}
-
-	@Override
-	public void addMessage(String message) {
-		messages.put(DEFAULT_MSG_NAME_FIELD, message);
 	}
 
 	@Override

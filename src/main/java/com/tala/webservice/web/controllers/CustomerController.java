@@ -34,6 +34,13 @@ public class CustomerController extends BaseController {
 		
 		try {
 			Customer customer = customerRepository.findOne(id);
+			
+			if (customer == null) {
+				jsonResponse.setSuccess(false, "Resource not found", StandardJsonResponse.RESOURCE_NOT_FOUND_MSG);
+				jsonResponse.setHttpResponseCode(HttpStatus.SC_NO_CONTENT);
+				return jsonResponse;
+			}
+			
 			responseData.put("firstName", customer.getFirstName());
 			responseData.put("lastName", customer.getLastName());
 			
@@ -44,10 +51,10 @@ public class CustomerController extends BaseController {
 			
 		} catch (Exception e) {
 			logger.error("exception", e);
-			jsonResponse.setSuccess(false, StandardJsonResponse.DEFAULT_MSG_TITLE_VALUE, StandardJsonResponse.SERVER_SIDE_ERROR_MSG);
-            jsonResponse.setHttpResponseCode(HttpStatus.SC_INTERNAL_SERVER_ERROR);
-            return jsonResponse;
-		}	
+			jsonResponse.setSuccess(false, StandardJsonResponse.DEFAULT_MSG_TITLE_VALUE, StandardJsonResponse.DEFAULT_MSG_NAME_VALUE);
+			jsonResponse.setHttpResponseCode(HttpStatus.SC_INTERNAL_SERVER_ERROR);
+			return jsonResponse;
+		}
 		
 	}
 
