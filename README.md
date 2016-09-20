@@ -12,9 +12,9 @@ JAVA Based REST API
 * Internet connection required to run the project 
 * ./gradlew bootRun
 
-http://localhost:8585 
+* REST ENDPOINTS
+* http://localhost:8585 
 
 ### Who do I talk to? ###
 
 * George Otieno <georgeorti@gmail.com>
-* Other community or team contact
