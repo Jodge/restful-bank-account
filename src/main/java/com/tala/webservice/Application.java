@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import com.tala.webservice.domain.Account;
-import com.tala.webservice.services.AccountRepository;
+import com.tala.webservice.services.AccountService;
 
 @SpringBootApplication
 public class Application {
@@ -16,10 +16,10 @@ public class Application {
 	}
 	
 	@Bean
-	public CommandLineRunner init(AccountRepository repository) {
+	public CommandLineRunner init(AccountService accountService) {
 		return (args) -> {
 			// create account
-			repository.save(new Account(0));
+			accountService.save(new Account(0));
 		};
 	}
 }

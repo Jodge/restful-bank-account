@@ -3,6 +3,12 @@ package com.tala.webservice.rest.models;
 public class UserTransaction {
     
     private double amount;
+    
+    public UserTransaction() {}
+    
+    public UserTransaction(double amount) {
+    	this.amount = amount;
+    }
 
     public double getAmount() {
         return amount;

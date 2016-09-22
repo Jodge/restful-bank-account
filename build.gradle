@@ -34,8 +34,12 @@ dependencies {
 	compile('com.h2database:h2')
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-web')
-	testCompile('org.springframework:spring-test:4.3.2')
-	testCompile('org.easymock:easymock:3.4')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
-	testCompile('org.testng:testng:6.9.4')
+	testCompile('com.google.code.gson:gson:2.7')
+}
+
+clean {
+	delete "$rootDir/build"
+	delete "$rootDir/test-output"
+	delete "$rootDir/bin"
 }

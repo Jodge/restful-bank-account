@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tala.webservice.domain.Account;
 import com.tala.webservice.domain.AccountTransaction;
 import com.tala.webservice.enums.TransactionType;
-import com.tala.webservice.services.AccountRepository;
-import com.tala.webservice.services.TransactionsRepository;
+import com.tala.webservice.services.AccountService;
+import com.tala.webservice.services.TransactionsService;
 import com.tala.webservice.shared.utils.AccountUtils;
 import com.tala.webservice.shared.web.StandardJsonResponse;
 import com.tala.webservice.shared.web.StandardJsonResponseImpl;
@@ -33,10 +33,10 @@ public class DepositController extends BaseController {
     private static final int MAX_DEPOSIT_TRANSACTIONS_PER_DAY = 4;
     
     @Autowired
-    AccountRepository accountRepository;
+    AccountService accountService;
     
     @Autowired
-    TransactionsRepository transactionsRepository; 
+    TransactionsService transactionsService; 
     
     @RequestMapping(value="/", method = RequestMethod.POST)
     public @ResponseBody StandardJsonResponse makeDeposit(HttpServletRequest request, HttpServletResponse response, HttpSession session,
@@ -49,7 +49,7 @@ public class DepositController extends BaseController {
             double total = 0;
             
             // check maximum limit deposit for the day has been reached
-            List<AccountTransaction> deposits  = transactionsRepository.findByDateBetweenAndType(AccountUtils.getStartOfDay(new Date()),
+            List<AccountTransaction> deposits  = transactionsService.findByDateBetweenAndType(AccountUtils.getStartOfDay(new Date()),
                     AccountUtils.getEndOfDay(new Date()), TransactionType.DEPOSIT.getId());
             
             if (deposits.size() > 0) {
@@ -69,17 +69,18 @@ public class DepositController extends BaseController {
                 jsonResponse.setHttpResponseCode(HttpStatus.SC_NOT_ACCEPTABLE);
                 return jsonResponse;
             }
-            List<AccountTransaction> transactions  = transactionsRepository.findByDateBetween(AccountUtils.getStartOfDay(new Date()),
+            List<AccountTransaction> transactions  = transactionsService.findByDateBetween(AccountUtils.getStartOfDay(new Date()),
                     AccountUtils.getEndOfDay(new Date()));
             
+            // check whether transactions exceeds the max allowed per day
             if (transactions.size() < MAX_DEPOSIT_TRANSACTIONS_PER_DAY) {
                 AccountTransaction accountTransaction = new AccountTransaction(TransactionType.DEPOSIT.getId(), userTransaction.getAmount(), new Date());
-                double amount  = transactionsRepository.save(accountTransaction).getAmont();
+                double amount  = transactionsService.save(accountTransaction).getAmont();
                 
-                Account account = accountRepository.findOne(ACCOUNT_ID);
+                Account account = accountService.findOne(ACCOUNT_ID);
                 double newBalance = amount + account.getAmount();
                 account.setAmount(newBalance);
-                accountRepository.save(account);
+                accountService.save(account);
                 
                 jsonResponse.setSuccess(true, "", "Deposit sucessfully Transacted");
                 jsonResponse.setHttpResponseCode(HttpStatus.SC_OK);

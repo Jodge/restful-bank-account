@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tala.webservice.domain.Account;
-import com.tala.webservice.services.AccountRepository;
+import com.tala.webservice.services.AccountService;
 import com.tala.webservice.shared.web.StandardJsonResponse;
 import com.tala.webservice.shared.web.StandardJsonResponseImpl;
 
@@ -23,7 +23,7 @@ import com.tala.webservice.shared.web.StandardJsonResponseImpl;
 public class BalanceController extends BaseController { 
     
     @Autowired
-    AccountRepository accountRepository;
+    AccountService accountService;
     
     @RequestMapping(value="/", method = RequestMethod.GET)
     public @ResponseBody StandardJsonResponse getBalance(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
@@ -32,7 +32,7 @@ public class BalanceController extends BaseController {
         HashMap<String, Object> responseData = new HashMap<>();
         
         try {
-            Account account = accountRepository.findOne(ACCOUNT_ID);
+            Account account = accountService.findOne(ACCOUNT_ID);
             
             if (account != null) {
                 responseData.put("balance", "$"+ account.getAmount());

@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.tala.webservice.domain.AccountTransaction;
 
-public interface TransactionsRepository extends CrudRepository<AccountTransaction, Long>{
+public interface TransactionsService extends CrudRepository<AccountTransaction, Long>{
 	
 	List<AccountTransaction> findByDateBetween(Date StartOfDay, Date endOfDay);
 	
