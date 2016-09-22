@@ -18,3 +18,7 @@ JAVA Based REST API
 ### Who do I talk to? ###
 
 * George Otieno <georgeorti@gmail.com>
+
+curl -H "Content-Type: application/json" -X POST -d '{"amount":400"}' http://localhost:8585/deposit/
+Windows
+curl -H "Content-Type: application/json" -X POST http://localhost:8585/deposit/ -d "{\"amount\":400}"

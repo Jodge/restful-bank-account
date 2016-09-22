@@ -5,11 +5,12 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.tala.webservice.domain.Transactions;
+import com.tala.webservice.domain.AccountTransaction;
 
-public interface TransactionsRepository extends CrudRepository<Transactions, Long>{
+public interface TransactionsRepository extends CrudRepository<AccountTransaction, Long>{
 	
-	List<Transactions> findByDateBetweenAndTransactionType(Date StartOfDay, Date endOfDay, String transactionType);
+	List<AccountTransaction> findByDateBetween(Date StartOfDay, Date endOfDay);
 	
+	List<AccountTransaction> findByDateBetweenAndType(Date StartOfDay, Date endOfDay, int type);
 
 }

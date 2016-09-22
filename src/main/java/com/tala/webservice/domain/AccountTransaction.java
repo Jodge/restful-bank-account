@@ -8,19 +8,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Transactions {
+public class AccountTransaction {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	private String transactionType;
+	private int type;
 	private double amont;
 	private Date date;
 	
-	protected Transactions() {}
+	protected AccountTransaction() {}
 	
-	public Transactions(String transactionType, double amount, Date date) {
-		this.transactionType = transactionType;
+	public AccountTransaction(int type, double amount, Date date) {
+		this.type = type;
 		this.amont = amount;
 		this.date = date;
 	}
@@ -33,15 +33,15 @@ public class Transactions {
 		this.id = id;
 	}
 
-	public String getTransactionType() {
-		return transactionType;
-	}
+	public int getType() {
+        return type;
+    }
 
-	public void setTransactionType(String transactionType) {
-		this.transactionType = transactionType;
-	}
+    public void setType(int type) {
+        this.type = type;
+    }
 
-	public double getAmont() {
+    public double getAmont() {
 		return amont;
 	}
 
@@ -56,7 +56,4 @@ public class Transactions {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	
-	
-
 }
