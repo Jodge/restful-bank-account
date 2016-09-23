@@ -16,6 +16,10 @@ import com.tala.webservice.services.TransactionsService;
 import com.tala.webservice.shared.utils.AccountUtils;
 import static org.assertj.core.api.Assertions.*;
 
+/**
+ * @author George Otieno
+ *
+ */
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class TransactionsServiceTests {

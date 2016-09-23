@@ -4,28 +4,27 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.tala.webservice.domain.Account;
-import com.tala.webservice.services.AccountService;
 import com.tala.webservice.web.controllers.BalanceController;
 
 import static org.mockito.BDDMockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+/**
+ * @author George Otieno
+ *
+ */
 @RunWith(SpringRunner.class)
 @WebMvcTest(BalanceController.class)
-public class BalanceControllerTests {
+public class BalanceControllerTests extends BaseControllerTests {
 	
 	@Autowired
     private MockMvc mvc;
-
-    @MockBean
-    private AccountService accountService;
     
     @Test
     public void testGetBalance() throws Exception {

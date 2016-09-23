@@ -3,23 +3,18 @@ package com.tala.webservice.web.controllers;
 import java.util.HashMap;
 
 import org.apache.http.HttpStatus;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tala.webservice.domain.Account;
-import com.tala.webservice.services.AccountService;
 import com.tala.webservice.shared.web.StandardJsonResponse;
 import com.tala.webservice.shared.web.StandardJsonResponseImpl;
 
 @RestController
 @RequestMapping(value="/balance")
 public class BalanceController extends BaseController { 
-    
-    @Autowired
-    AccountService accountService;
     
     @RequestMapping(value="/", method = RequestMethod.GET)
     public @ResponseBody StandardJsonResponse getBalance() {

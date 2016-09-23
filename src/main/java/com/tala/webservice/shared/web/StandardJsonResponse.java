@@ -8,11 +8,7 @@ public interface StandardJsonResponse {
 	static String DEFAULT_MSG_TITLE_FIELD = "title";
 	static String DEFAULT_MSG_TITLE_VALUE = "Internal Server Error";
 	static String DEFAULT_MSG_NAME_VALUE = "The server encountered an unexpected condition which prevented it from fulfilling the request.";
-	static String VERSIONING_ERROR_MSG = "There is an error with versioning. If you are performing an update, please ensure that the version number has been incremented.";
-	static String RESOURCE_TO_INSERT_ALREADY_EXISTS_MSG = "The resource to insert already exists. Please check your resource ID.";
 	static String RESOURCE_NOT_FOUND_MSG = "The resource requested is not found. Please check your resource ID.";
-	static String UNAUTHORISED_REQUEST_MSG = "You do not have permissions to access the resource. Make sure that you are logged in using an account that has permissions to perform the operation.";
-	static String INVALID_ARGUMENT_MSG = "One or more of the arguments provided is invalid.";
 		
 	public void setSuccess(boolean success);
 

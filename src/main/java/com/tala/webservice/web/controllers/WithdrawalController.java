@@ -18,14 +18,14 @@ import com.tala.webservice.shared.web.StandardJsonResponse;
 import com.tala.webservice.shared.web.StandardJsonResponseImpl;
 
 @RestController
-@RequestMapping("/deposit")
-public class DepositController extends BaseController {
-    
-    private static final double MAX_DEPOSIT_PER_TRANSACTION  = 40000; // $40k
-    private static final double MAX_DEPOSIT_PER_DAY = 150000; // $150k
-    private static final int MAX_DEPOSIT_TRANSACTIONS_PER_DAY = 4;
-    
-    @RequestMapping(value="/", method = RequestMethod.POST)
+@RequestMapping(value = "/withdrawal")
+public class WithdrawalController extends BaseController {
+	
+	private static final double MAX_WITHDRAWAL_PER_TRANSACTION  = 20000; // $20k
+    private static final double MAX_WITHDRAWAL_PER_DAY = 50000; // $50k
+    private static final int MAX_WITHDRAWAL_TRANSACTIONS_PER_DAY = 3;
+	
+	@RequestMapping(value="/", method = RequestMethod.POST)
     public @ResponseBody StandardJsonResponse makeDeposit(@RequestBody com.tala.webservice.rest.models.UserTransaction userTransaction) {
         
         StandardJsonResponse jsonResponse = new StandardJsonResponseImpl();
@@ -34,43 +34,52 @@ public class DepositController extends BaseController {
             
             double total = 0;
             
-            // check maximum limit deposit for the day has been reached
-            List<AccountTransaction> deposits  = transactionsService.findByDateBetweenAndType(AccountUtils.getStartOfDay(new Date()),
-                    AccountUtils.getEndOfDay(new Date()), TransactionType.DEPOSIT.getId());
+            // check balance
+            double balance = accountService.findOne(ACCOUNT_ID).getAmount();
+            if (userTransaction.getAmount() > balance) {
+            	jsonResponse.setSuccess(false, "Error", "You have insufficient funds");
+                jsonResponse.setHttpResponseCode(HttpStatus.SC_NOT_ACCEPTABLE);
+                return jsonResponse;
+            }
             
-            if (deposits.size() > 0) {
-                for (AccountTransaction accountTransaction: deposits) {
+            
+            // check maximum limit withdrawal for the day has been reached
+            List<AccountTransaction> withdrawals  = transactionsService.findByDateBetweenAndType(AccountUtils.getStartOfDay(new Date()),
+                    AccountUtils.getEndOfDay(new Date()), TransactionType.WITHDRAWAL.getId());
+            
+            if (withdrawals.size() > 0) {
+                for (AccountTransaction accountTransaction: withdrawals) {
                     total+=accountTransaction.getAmont(); 
                 }
-                if (total  + userTransaction.getAmount()  > MAX_DEPOSIT_PER_DAY) {
-                    jsonResponse.setSuccess(false, "Error", "Deposit for the day should not be more than $150K");
+                if (total + userTransaction.getAmount() > MAX_WITHDRAWAL_PER_DAY) {
+                    jsonResponse.setSuccess(false, "Error", "Withdrawal per day should not be more than $50K");
                     jsonResponse.setHttpResponseCode(HttpStatus.SC_NOT_ACCEPTABLE);
                     return jsonResponse;
                 }
             }
             
-            // Check whether the amount being deposited exceeds the MAX_DEPOSIT_PER_TRANSACTION
-            if(userTransaction.getAmount() > MAX_DEPOSIT_PER_TRANSACTION) {                
-                jsonResponse.setSuccess(false, "Error", "Deposit per transaction should not be more than $40K");
+            // Check whether the amount being withdrawn exceeds the MAX_WITHDRAWAL_PER_TRANSACTION
+            if(userTransaction.getAmount() > MAX_WITHDRAWAL_PER_TRANSACTION) {                
+                jsonResponse.setSuccess(false, "Error", "Exceeded Maximum Withdrawal Per Transaction");
                 jsonResponse.setHttpResponseCode(HttpStatus.SC_NOT_ACCEPTABLE);
                 return jsonResponse;
             }
             
             // check whether transactions exceeds the max allowed per day
-            if (deposits.size() < MAX_DEPOSIT_TRANSACTIONS_PER_DAY) {
-                AccountTransaction accountTransaction = new AccountTransaction(TransactionType.DEPOSIT.getId(), userTransaction.getAmount(), new Date());
+            if (withdrawals.size() < MAX_WITHDRAWAL_TRANSACTIONS_PER_DAY) {
+                AccountTransaction accountTransaction = new AccountTransaction(TransactionType.WITHDRAWAL.getId(), userTransaction.getAmount(), new Date());
                 double amount  = transactionsService.save(accountTransaction).getAmont();
                 
                 Account account = accountService.findOne(ACCOUNT_ID);
-                double newBalance = account.getAmount() + amount;
+                double newBalance = account.getAmount() - amount;
                 account.setAmount(newBalance);
                 accountService.save(account);
                 
-                jsonResponse.setSuccess(true, "", "Deposit sucessfully Transacted");
+                jsonResponse.setSuccess(true, "", "Withdrawal sucessfully Transacted");
                 jsonResponse.setHttpResponseCode(HttpStatus.SC_OK);
                 
             } else {
-                jsonResponse.setSuccess(false, "Error", "maximum transactions for the day Exceeded");
+                jsonResponse.setSuccess(false, "Error", "Maximum Withdrawal transactions for the day Exceeded");
                 jsonResponse.setHttpResponseCode(HttpStatus.SC_NOT_ACCEPTABLE);
             }
             

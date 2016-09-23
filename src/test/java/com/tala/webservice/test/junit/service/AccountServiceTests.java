@@ -11,6 +11,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.tala.webservice.domain.Account;
 import com.tala.webservice.services.AccountService;
 
+/**
+ * @author George Otieno
+ *
+ */
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class AccountServiceTests {
@@ -23,9 +27,9 @@ public class AccountServiceTests {
 	
 	@Test
 	public void testFindOne() {
-		this.entityManager.persist(new Account(400));
+		this.entityManager.persist(new Account(0.0));
 		Account account = this.accountService.findOne(1L);
-		assertThat(account.getAmount()).isEqualTo(400);
+		assertThat(account.getAmount()).isEqualTo(0.0);
 		
 	}
 	
