@@ -30,7 +30,7 @@ public class WithdrawalController extends BaseController {
     private static final int MAX_WITHDRAWAL_TRANSACTIONS_PER_DAY = 3;
 	
 	@RequestMapping(value="/", method = RequestMethod.POST)
-    public @ResponseBody StandardJsonResponse makeDeposit(@RequestBody com.tala.webservice.rest.models.UserTransaction userTransaction) {
+    public @ResponseBody StandardJsonResponse makeWithDrawal(@RequestBody com.tala.webservice.rest.models.UserTransaction userTransaction) {
         
         StandardJsonResponse jsonResponse = new StandardJsonResponseImpl();
         
