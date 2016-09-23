@@ -7,6 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.tala.webservice.services.AccountService;
 import com.tala.webservice.services.TransactionsService;
 
+/**
+ * @author George Otieno
+ *
+ */
 public class BaseController {
 	
 	protected final Log logger = LogFactory.getLog(getClass());

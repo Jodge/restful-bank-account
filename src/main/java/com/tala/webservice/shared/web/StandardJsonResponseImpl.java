@@ -2,6 +2,10 @@ package com.tala.webservice.shared.web;
 
 import java.util.HashMap;
 
+/**
+ * @author George Otieno
+ *
+ */
 public class StandardJsonResponseImpl implements StandardJsonResponse {
 	
 	private boolean success = false;

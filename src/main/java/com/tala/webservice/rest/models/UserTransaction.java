@@ -1,5 +1,9 @@
 package com.tala.webservice.rest.models;
 
+/**
+ * @author George Otieno
+ *
+ */
 public class UserTransaction {
     
     private double amount;

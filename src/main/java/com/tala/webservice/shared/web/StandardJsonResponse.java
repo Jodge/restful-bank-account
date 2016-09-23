@@ -2,6 +2,10 @@ package com.tala.webservice.shared.web;
 
 import java.util.HashMap;
 
+/**
+ * @author George Otieno
+ *
+ */
 public interface StandardJsonResponse {
 
 	static String DEFAULT_MSG_NAME_FIELD = "message";

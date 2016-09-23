@@ -17,6 +17,10 @@ import com.tala.webservice.shared.utils.AccountUtils;
 import com.tala.webservice.shared.web.StandardJsonResponse;
 import com.tala.webservice.shared.web.StandardJsonResponseImpl;
 
+/**
+ * @author George Otieno
+ *
+ */
 @RestController
 @RequestMapping("/deposit")
 public class DepositController extends BaseController {

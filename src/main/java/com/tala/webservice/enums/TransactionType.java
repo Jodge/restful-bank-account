@@ -1,5 +1,9 @@
 package com.tala.webservice.enums;
 
+/**
+ * @author George Otieno
+ *
+ */
 public enum TransactionType {
     
     DEPOSIT(1), WITHDRAWAL(2);

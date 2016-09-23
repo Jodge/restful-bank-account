@@ -7,6 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * @author George Otieno
+ *
+ */
 @Entity
 public class AccountTransaction {
 	

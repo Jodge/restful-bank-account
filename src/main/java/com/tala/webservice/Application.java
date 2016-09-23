@@ -8,6 +8,10 @@ import org.springframework.context.annotation.Bean;
 import com.tala.webservice.domain.Account;
 import com.tala.webservice.services.AccountService;
 
+/**
+ * @author George Otieno
+ *
+ */
 @SpringBootApplication
 public class Application {
 	

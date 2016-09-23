@@ -12,6 +12,10 @@ import com.tala.webservice.domain.Account;
 import com.tala.webservice.shared.web.StandardJsonResponse;
 import com.tala.webservice.shared.web.StandardJsonResponseImpl;
 
+/**
+ * @author George Otieno
+ *
+ */
 @RestController
 @RequestMapping(value="/balance")
 public class BalanceController extends BaseController { 
