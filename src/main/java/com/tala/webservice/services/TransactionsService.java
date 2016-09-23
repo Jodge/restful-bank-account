@@ -9,8 +9,6 @@ import com.tala.webservice.domain.AccountTransaction;
 
 public interface TransactionsService extends CrudRepository<AccountTransaction, Long>{
 	
-	List<AccountTransaction> findByDateBetween(Date StartOfDay, Date endOfDay);
-	
 	List<AccountTransaction> findByDateBetweenAndType(Date StartOfDay, Date endOfDay, int type);
 
 }

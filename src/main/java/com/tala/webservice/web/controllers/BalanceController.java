@@ -2,10 +2,6 @@ package com.tala.webservice.web.controllers;
 
 import java.util.HashMap;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +22,7 @@ public class BalanceController extends BaseController {
     AccountService accountService;
     
     @RequestMapping(value="/", method = RequestMethod.GET)
-    public @ResponseBody StandardJsonResponse getBalance(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+    public @ResponseBody StandardJsonResponse getBalance() {
         
         StandardJsonResponse jsonResponse = new StandardJsonResponseImpl();
         HashMap<String, Object> responseData = new HashMap<>();

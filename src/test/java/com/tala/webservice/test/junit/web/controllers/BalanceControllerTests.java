@@ -1,4 +1,4 @@
-package com.tala.webservice.test.junit.web;
+package com.tala.webservice.test.junit.web.controllers;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

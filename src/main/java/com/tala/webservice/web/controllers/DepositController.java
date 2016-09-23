@@ -3,10 +3,6 @@ package com.tala.webservice.web.controllers;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,8 +35,7 @@ public class DepositController extends BaseController {
     TransactionsService transactionsService; 
     
     @RequestMapping(value="/", method = RequestMethod.POST)
-    public @ResponseBody StandardJsonResponse makeDeposit(HttpServletRequest request, HttpServletResponse response, HttpSession session,
-            @RequestBody com.tala.webservice.rest.models.UserTransaction userTransaction) {
+    public @ResponseBody StandardJsonResponse makeDeposit(@RequestBody com.tala.webservice.rest.models.UserTransaction userTransaction) {
         
         StandardJsonResponse jsonResponse = new StandardJsonResponseImpl();
         
@@ -69,11 +64,9 @@ public class DepositController extends BaseController {
                 jsonResponse.setHttpResponseCode(HttpStatus.SC_NOT_ACCEPTABLE);
                 return jsonResponse;
             }
-            List<AccountTransaction> transactions  = transactionsService.findByDateBetween(AccountUtils.getStartOfDay(new Date()),
-                    AccountUtils.getEndOfDay(new Date()));
             
             // check whether transactions exceeds the max allowed per day
-            if (transactions.size() < MAX_DEPOSIT_TRANSACTIONS_PER_DAY) {
+            if (deposits.size() < MAX_DEPOSIT_TRANSACTIONS_PER_DAY) {
                 AccountTransaction accountTransaction = new AccountTransaction(TransactionType.DEPOSIT.getId(), userTransaction.getAmount(), new Date());
                 double amount  = transactionsService.save(accountTransaction).getAmont();
                 
@@ -86,7 +79,7 @@ public class DepositController extends BaseController {
                 jsonResponse.setHttpResponseCode(HttpStatus.SC_OK);
                 
             } else {
-                jsonResponse.setSuccess(false, "", "maximum transactions for the day Exceeded");
+                jsonResponse.setSuccess(false, "Error", "maximum transactions for the day Exceeded");
                 jsonResponse.setHttpResponseCode(HttpStatus.SC_NOT_ACCEPTABLE);
             }
             

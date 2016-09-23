@@ -27,16 +27,6 @@ public class TransactionsServiceTests {
 	TransactionsService transactionsService;
 	
 	@Test
-	public void testFindByDateBetween() {
-		this.entityManager.persist(new AccountTransaction(TransactionType.DEPOSIT.getId(), 1000, new Date()));
-		List<AccountTransaction> transactions = transactionsService.findByDateBetween(AccountUtils.getStartOfDay(new Date()), AccountUtils.getEndOfDay(new Date()));
-		assertThat(transactions.get(0)).isNotNull();
-		assertThat(transactions.get(0).getType()).isEqualTo(TransactionType.DEPOSIT.getId());
-		assertThat(transactions.get(0).getAmont()).isEqualTo(1000);
-		assertThat(transactions.get(0).getDate()).isBetween(AccountUtils.getStartOfDay(new Date()), AccountUtils.getEndOfDay(new Date()));
-	}
-	
-	@Test
 	public void testFindByDateBetweenAndType() {
 		this.entityManager.persist(new AccountTransaction(TransactionType.WITHDRAWAL.getId(), 1000, new Date()));
 		List<AccountTransaction> transactions = transactionsService.findByDateBetweenAndType(AccountUtils.getStartOfDay(new Date()), AccountUtils.getEndOfDay(new Date()), TransactionType.WITHDRAWAL.getId());

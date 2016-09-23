@@ -43,3 +43,12 @@ clean {
 	delete "$rootDir/test-output"
 	delete "$rootDir/bin"
 }
+
+sourceSets {
+
+    test {
+        java {
+            srcDirs = ["src/test/java/com/tala/webservice/test/junit"]
+        }
+    }
+}
