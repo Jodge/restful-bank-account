@@ -36,7 +36,7 @@ public class TransactionsServiceTests {
 		List<AccountTransaction> transactions = transactionsService.findByDateBetweenAndType(AccountUtils.getStartOfDay(new Date()), AccountUtils.getEndOfDay(new Date()), TransactionType.WITHDRAWAL.getId());
 		assertThat(transactions.get(0)).isNotNull();
 		assertThat(transactions.get(0).getType()).isEqualTo(TransactionType.WITHDRAWAL.getId());
-		assertThat(transactions.get(0).getAmont()).isEqualTo(1000);
+		assertThat(transactions.get(0).getAmount()).isEqualTo(1000);
 		assertThat(transactions.get(0).getDate()).isBetween(AccountUtils.getStartOfDay(new Date()), AccountUtils.getEndOfDay(new Date()));
 	}
 
