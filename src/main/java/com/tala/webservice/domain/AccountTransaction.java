@@ -18,14 +18,14 @@ public class AccountTransaction {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	private int type;
-	private double amont;
+	private double amount;
 	private Date date;
 	
 	protected AccountTransaction() {}
 	
 	public AccountTransaction(int type, double amount, Date date) {
 		this.type = type;
-		this.amont = amount;
+		this.amount = amount;
 		this.date = date;
 	}
 
@@ -45,12 +45,12 @@ public class AccountTransaction {
         this.type = type;
     }
 
-    public double getAmont() {
-		return amont;
+    public double getAmount() {
+		return amount;
 	}
 
-	public void setAmont(double amont) {
-		this.amont = amont;
+	public void setAmount(double amount) {
+		this.amount = amount;
 	}
 
 	public Date getDate() {

@@ -44,7 +44,7 @@ public class DepositController extends BaseController {
             
             if (deposits.size() > 0) {
                 for (AccountTransaction accountTransaction: deposits) {
-                    total+=accountTransaction.getAmont(); 
+                    total+=accountTransaction.getAmount(); 
                 }
                 if (total  + userTransaction.getAmount()  > MAX_DEPOSIT_PER_DAY) {
                     jsonResponse.setSuccess(false, "Error", "Deposit for the day should not be more than $150K");
@@ -63,7 +63,7 @@ public class DepositController extends BaseController {
             // check whether transactions exceeds the max allowed per day
             if (deposits.size() < MAX_DEPOSIT_TRANSACTIONS_PER_DAY) {
                 AccountTransaction accountTransaction = new AccountTransaction(TransactionType.DEPOSIT.getId(), userTransaction.getAmount(), new Date());
-                double amount  = transactionsService.save(accountTransaction).getAmont();
+                double amount  = transactionsService.save(accountTransaction).getAmount();
                 
                 Account account = accountService.findOne(ACCOUNT_ID);
                 double newBalance = account.getAmount() + amount;

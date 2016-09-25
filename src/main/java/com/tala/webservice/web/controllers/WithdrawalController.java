@@ -53,7 +53,7 @@ public class WithdrawalController extends BaseController {
             
             if (withdrawals.size() > 0) {
                 for (AccountTransaction accountTransaction: withdrawals) {
-                    total+=accountTransaction.getAmont(); 
+                    total+=accountTransaction.getAmount(); 
                 }
                 if (total + userTransaction.getAmount() > MAX_WITHDRAWAL_PER_DAY) {
                     jsonResponse.setSuccess(false, "Error", "Withdrawal per day should not be more than $50K");
@@ -72,7 +72,7 @@ public class WithdrawalController extends BaseController {
             // check whether transactions exceeds the max allowed per day
             if (withdrawals.size() < MAX_WITHDRAWAL_TRANSACTIONS_PER_DAY) {
                 AccountTransaction accountTransaction = new AccountTransaction(TransactionType.WITHDRAWAL.getId(), userTransaction.getAmount(), new Date());
-                double amount  = transactionsService.save(accountTransaction).getAmont();
+                double amount  = transactionsService.save(accountTransaction).getAmount();
                 
                 Account account = accountService.findOne(ACCOUNT_ID);
                 double newBalance = account.getAmount() - amount;
