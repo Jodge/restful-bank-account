@@ -15,11 +15,22 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'spring-boot'
 apply plugin: 'jacoco'
+apply plugin: 'war'
 
-jar {
-	baseName = 'tala-webservice'
-	version = '0.0.1-SNAPSHOT'
+bootRepackage {
+   mainClass = 'com.tala.webservice.Application'
 }
+
+war {
+    rootSpec.exclude("**/tomcat-*.jar")
+    exclude("**/master/**")
+}
+
+springBoot {
+    mainClass = 'com.tala.webservice.Application'
+    executable = true
+}
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
