@@ -23,7 +23,6 @@ bootRepackage {
 
 war {
     rootSpec.exclude("**/tomcat-*.jar")
-    exclude("**/master/**")
 }
 
 springBoot {
