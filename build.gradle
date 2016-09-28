@@ -59,7 +59,7 @@ sourceSets {
 
     test {
         java {
-            srcDirs = ["src/test/java/com/tala/webservice/test/junit"]
+            srcDirs = ["src/test/java/com/example/webservice/test/junit"]
         }
     }
 }
