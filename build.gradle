@@ -18,7 +18,7 @@ apply plugin: 'jacoco'
 apply plugin: 'war'
 
 bootRepackage {
-   mainClass = 'com.tala.webservice.Application'
+   mainClass = 'com.example.webservice.Application'
 }
 
 war {
@@ -26,7 +26,7 @@ war {
 }
 
 springBoot {
-    mainClass = 'com.tala.webservice.Application'
+    mainClass = 'com.example.webservice.Application'
     executable = true
 }
 
