@@ -23,6 +23,7 @@ bootRepackage {
 
 war {
     rootSpec.exclude("**/tomcat-*.jar")
+    baseName = 'account'
 }
 
 springBoot {
