@@ -18,32 +18,33 @@ The goal of this mini project is to write a simple micro web service to mimic a 
   - Cannot withdraw when balance is less than withdrawal amount
 - The service should handle all the error cases and return the appropriate error HTTP status code and error message (Eg. If an attempt is to withdraw greater than $20k in a single transaction, the error message should say “Exceeded Maximum Withdrawal Per Transaction”).
 
-### How do I run the project? ###
-* Execute ** start.sh **
-* N.B.: Internet Connection needed to donwload jars from Maven Repo
+###### How do I run the project? ###
+- [ ]  ``` $ ./start.sh ```
 
-### Rest Endpoints
-#### http://localhost:8585/balance/ 				[GET]
-#### http://localhost:8585/deposit/				[POST]
-#### http://localhost:8585/withdrawal/			[POST]
+###### Rest Endpoints
 
-### Executing API calls using Curl
+| URL                                | Http Verb    | 
+| ---------------------------------- |:------------:|
+| http://localhost:8585/balance/     | GET          |
+| http://localhost:8585/deposit/     | POST         |
+| http://localhost:8585/withdrawal/  | POST         |
 
-* curl http://localhost:8585/balance/ 
-* curl -H "Content-Type: application/json" -X POST -d '{"amount":25000}' http://localhost:8585/deposit/
-* curl -H "Content-Type: application/json" -X POST -d '{"amount":15000}' http://localhost:8585/withdrawal/
+###### Executing API calls using Curl
+```bash
+curl -X GET http://localhost:8585/balance/ 
 
-> N.B.: Added backslash to escape on Windows OS
+curl -H "Content-Type: application/json" -X POST -d '{"amount":25000}' http://localhost:8585/deposit/
 
-* curl -H "Content-Type: application/json" -X POST http://localhost:8585/deposit/ -d "{\"amount\":400}"
+curl -H "Content-Type: application/json" -X POST -d '{"amount":15000}' http://localhost:8585/withdrawal/
 
-### Running tests
-* Execute ** run-tests.sh **
-* Test Reports ** build/reports **
-* Test Results ** build/test-results **
-* [Code Coverage] Jacoco ** build/reports/jacoco/test/html/index.html **
+```
+
+###### Running tests
+- [ ]  ``` $ ./run-tests.sh ```
+* Test Reports ```build/reports```
+* Test Results ```build/test-results```
+* [Code Coverage] Jacoco ```build/reports/jacoco/test/html/index.html```
 
 
-### Who do I talk to? 
-
-* George Otieno <georgeorti@gmail.com>
+###### Who do I talk to? 
+George Otieno <georgeorti@gmail.com> :email:
